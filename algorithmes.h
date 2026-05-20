@@ -18,3 +18,5 @@ void methode_glouton(const InstanceTSP & instance, Solution & solution, int depa
 void afficher_solution(const Solution & solution);
 
 void amelioration_or_opt(const InstanceTSP & instance, Solution & solution);
+
+void amelioration_or_opt_rework(const InstanceTSP & instance, Solution & solution);
