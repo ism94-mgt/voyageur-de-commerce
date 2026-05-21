@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>TSP - Développement</title>
+
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Développement du Projet</h1>
+
+            <nav>
+                <a href="index.html">Accueil</a>
+                <a href="dev.html">Développement</a>
+                <a href="demo.html">Démonstration</a>
+                <a href="groupe.html">Groupe</a>
+            </nav>
+        </header>
+
+        <main>
+            <section>
+                <h2>Objectif du projet</h2>
+
+                <p>
+                    Notre projet consiste à étudier et résoudre
+                    le problème du voyageur de commerce.
+                    L'objectif est de trouver le trajet le plus court
+                    permettant de visiter toutes les villes une seule
+                    fois avant de revenir au point de départ.
+                </p>
+            </section>
+
+            <section>
+                <h2>Complexité du Problème</h2>
+
+                <p>
+                    Le problème du voyageur de commerce est un problème
+                    d'optimisation combinatoire considéré comme NP-difficile.
+                </p>
+
+                <p>
+                    Le nombre de possibilités augmente extrêmement vite
+                    avec le nombre de villes.
+                </p>
+            </section>
+
+            <section>
+                <h2>Algorithmes étudiés</h2>
+
+                <h3>Algorithme Glouton</h3>
+
+                <p>
+                  Nous avons utilisé un algorithme glouton
+                  qui consiste à choisir à chaque étape
+                  la ville la plus proche non encore visitée. 
+                </p>
+
+                <p>
+                    Cette méthode est rapide mais ne garantit
+                    pas toujours la solution optimale.
+                </p>
+
+                <h3>Optimisation OR-Opt</h3>
+
+                <p>
+                    Après la génération d'un premier chemin,
+                    nous avons utilisé l'algorithme OR-Opt
+                    pour améliorer la solution.
+                </p>
+
+                <p>
+                    Cette technique permet de déplacer
+                    certaines portions du trajet afin
+                    de réduire la distance totale parcourue.
+                </p>
+            </section>
+
+            <section>
+                <h2>Fonctionnement général</h2>
+
+                <ol>
+                    <li>Génération des villes</li>
+                    <li>Construction d'un premier chemin avec l'algorithme glouton</li>
+                    <li>Optimisation du trajet avec OR-Opt</li>
+                    <li>Affichage du chemin final</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Implémentation</h2>
+
+                <p>
+                    L'algorithme a été implémenté en C++ avec
+                    une gestion mémoire dynamique et une matrice
+                    de distances stockée en tableau 1D.
+                </p>
+            </section>
+        </main>
+
+        <footer>
+            <p>Projet Algorithmique - TSP</p>
+        </footer>
+    </body>
+</html>
