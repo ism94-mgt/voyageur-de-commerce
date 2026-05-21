@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>TSP - Démonstration</title>
+
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Démonstration du projet TSP</h1>
+
+            <nav>
+                <a href="index.html">Accueil</a>
+                <a href="dev.html">Développement</a>
+                <a href="demo.html">Démonstration</a>
+                <a href="groupe.html">Groupe</a>
+            </nav>
+        </header>
+
+        <main>
+            <section>
+                <h2>Principe de la démo</h2>
+
+                <p>
+                    Cette page présente le fonctionnement de notre programme.
+                    Le code C++ lit une instance du problème du voyageur de commerce,
+                    puis applique un algorithme glouton et une optimisation OR-opt.
+                </p>
+            </section>
+
+            <section>
+                <h2>Principe général</h2>
+
+                <p>
+                    Le programme résout le problème du voyageur de commerce (TSP)
+                    en plusieurs étapes : lecture d'une instance, calcul des distances,
+                    génération d'une solution gloutonne, puis amélioration avec OR-opt.
+                </p>
+            </section>
+
+            <section>
+                <h2>Étapes de l'algorithme</h2>
+
+                <ol>
+                    <li>Lecture du fichier .tsp (instance)</li>
+                    <li>Construction de la matrice des distances</li>
+                    <li>Exécution de l'algorithme glouton (plus proche voisin)</li>
+                    <li>Test de plusieurs villes de départ</li>
+                    <li>Sélection de la meilleure solution</li>
+                    <li>Amélioration avec OR-opt</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Algorithme glouton</h2>
+
+                <p>
+                    L'algorithme glouton (plus proche voisin) consiste
+                    à partir d'une ville, puis à choisir à chaque étape
+                    la ville non visitée la plus proche.
+                </p>
+
+                <p>
+                    Cette méthode est rapide et simple,
+                    mais elle ne garantit pas une solution optimale.
+                </p>
+
+                <p>Exemple de résultat :</p>
+
+                <p>0 → 3 → 5 → 2 → 1 → 4 → 0</p>
+            </section>
+
+            <section>
+                <h2>Amélioration OR-opt</h2>
+
+                <p>
+                    L'algorithme OR-opt améliore la solution obtenue
+                    en déplaçant certaines villes ou sous-chemins afin
+                    de réduire la distance totale parcourue.
+                </p>
+
+                <p>
+                     Il teste des modifications locales et conserve
+                     uniquement celles qui améliorent le coût global.
+                </p>
+
+                <p>Exemple après optimisation :</p>
+
+                <p>0 → 2 → 5 → 3 → 1 → 4 → 0</p>
+            </section>
+
+            <section>
+                <h2>Comparaison des résultats</h2>
+
+                <ul>
+                    <li><strong>Glouton :</strong> rapide mais solution souvent sous-optimale.</li>
+                    <li><strong>OR-opt :</strong> améliore la solution en réduisant la distance totale.</li>
+                    <li><strong>Conclusion :</strong> OR-opt donne de meilleurs résultats au prix d'un calcul plus long.</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>
+            <p>Projet Algorithmique - TSP</p>
+        </footer>
+    </body>
+</html>
