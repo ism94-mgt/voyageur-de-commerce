@@ -119,6 +119,7 @@ permet de diminuer la longueur totale de la tournée.
 Si un déplacement améliore la solution, on le garde et on recommence jusqu'à ne plus trouver d'amélioration.
 Cette méthode permet souvent d'obtenir une meilleure solution que le glouton seul.
 */
+/*
 void amelioration_or_opt(const InstanceTSP & instance, Solution & solution)
 {
     int n = solution.nb_villes;
@@ -203,7 +204,7 @@ void amelioration_or_opt(const InstanceTSP & instance, Solution & solution)
     }
 }
 
-
+*/
 
 
 /*
