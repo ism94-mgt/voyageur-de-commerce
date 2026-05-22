@@ -90,7 +90,7 @@ if (solution.ordre != nullptr)
 
 void afficher_solution(const Solution & solution)
 {
-    std::cout << "Solution trouvee :" << std::endl;
+    std::cout << "La meilleur solution trouvee :" << std::endl;
 
     for (int i = 0; i < solution.nb_villes; ++i)
     {
