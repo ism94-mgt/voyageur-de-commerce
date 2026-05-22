@@ -36,4 +36,4 @@ Depuis le dossier principal du projet, utiliser les commandes suivantes :
 ```bash
 cmake -S . -B build
 cmake --build build
-.\voyageur_de_commerce.exe att48.tsp
+.\build\voyageur_de_commerce.exe att48.tsps
