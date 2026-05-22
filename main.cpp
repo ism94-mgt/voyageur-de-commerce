@@ -30,7 +30,7 @@ void traiter_fichier(std::string nom_fichier)
         afficher_instance(instance);
 
         std::cout << std::endl;
-        std::cout << "Algorithme glouton + OR-opt + OR-opt rework :" << std::endl; 
+       std::cout << "OR-opt rework a partir d'une solution gloutonne :" << std::endl;
 
         double meilleure_longueur = -1;
         double meilleure_longueur_or_opt = -1;
@@ -141,18 +141,7 @@ void traiter_fichier(std::string nom_fichier)
         }
 
         std::cout << std::endl;
-        std::cout << "Meilleur depart glouton : " << meilleur_depart << std::endl;
-        afficher_solution(solution);
-
-        std::cout << std::endl;
-        std::cout << "Solution OR-opt obtenue depuis le depart : "
-                  << meilleur_depart_or_opt << std::endl;
-        afficher_solution(solution_or_opt);
-
-        
-        std::cout << std::endl;
-        std::cout << "Solution OR-opt rework obtenue depuis le depart : "
-                  << meilleur_depart_rework << std::endl;
+        std::cout << "Solution OR-opt rework obtenue depuis le depart : "<< meilleur_depart_rework << std::endl;
         afficher_solution(solution_rework);
     }
     else
