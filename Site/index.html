@@ -26,24 +26,86 @@
                 <h2>Présentation du TSP</h2>
 
                 <p>
-                    Le problème du Voyageur de Commerce (Travelling Salesman Problem)
-                    consiste à trouver le plus court chemin permettant de visiter
-                    plusieurs villes une seule fois et revenir au point de départ.
+                    Le problème du Voyageur de Commerce, aussi appelé
+                    Travelling Salesman Problem (TSP), est un problème
+                    d'optimisation très connu en algorithmique.
+                </p>
+
+                <p>
+                    Le principe est simple :
+                    un voyageur doit visiter plusieurs villes
+                    une seule fois chacune puis revenir
+                    à sa ville de départ.
+                </p>
+
+                <p>
+                    L'objectif est de trouver le trajet le plus court possible.
                 </p>
             </section>
 
             <section>
-                <h2>Pourquoi ce problème est important ?</h2>
+                <h2>Pourquoi ce problème est difficile ?</h2>
 
-                <p>Le TSP est utilisé dans plusieurs domaines :</p>
+                <p>
+                    Lorsque le nombre de villes augmente,
+                    le nombre de chemins possibles devient énorme.
+                </p>
+
+                <p>
+                    Par exemple, avec seulement 10 villes,
+                    il existe déjà plusieurs centaines
+                    de milliers de trajets possibles.
+                </p>
+
+                <p>
+                    Tester toutes les solutions devient donc
+                    beaucoup trop long pour de grandes instances.
+                </p>
+            </section>
+
+            <section>
+                <h2>Applications du TSP</h2>
+
+                <p>
+                    Le problème du voyageur de commerce est utilisé
+                    dans de nombreux domaines :
+                </p>
 
                 <ul>
-                    <li>Optimisations des livraisons</li>
+                    <li>Optimisation des livraisons</li>
                     <li>Transport et logistique</li>
-                    <li>Planification des trajets</li>
-                    <li>Intelligence artificielle</li>
-                    <li>Recherche algorithmique</li>
+                    <li>Création d'itinéraires GPS</li>
+                    <li>Organisation de tournées</li>
+                    <li>Robotique</li>
+                    <li>Recherche en intelligence artificielle</li>
                 </ul>
+            </section>
+
+            <section>
+                <h2>Notre projet</h2>
+
+                <p>
+                    Dans ce projet, nous avons développé
+                    un programme en C++ permettant
+                    de résoudre des instances du TSP.
+                </p>
+
+                <p>
+                    Nous avons utilisé :
+                </p>
+
+                <ul>
+                    <li>Un algorithme glouton</li>
+                    <li>Une amélioration OR-opt rework</li>
+                    <li>La lecture de fichiers .tsp</li>
+                    <li>Une matrice de distances</li>
+                </ul>
+
+                <p>
+                    Le but du projet est de comprendre
+                    comment construire puis améliorer
+                    une solution approximative du TSP.
+                </p>
             </section>
         </main>
 
