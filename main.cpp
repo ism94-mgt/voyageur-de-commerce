@@ -25,7 +25,7 @@ void traiter_fichier(std::string nom_fichier)
         afficher_instance(instance);
 
         std::cout << std::endl;
-        std::cout << "OR-opt rework a partir de la solution gloutonne : " << std::endl;
+        std::cout << "-- OR-opt rework a partir de la solution gloutonne --" << std::endl;
 
         double meilleure_longueur_rework = -1;
         int meilleur_depart_rework = 0;
