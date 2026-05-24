@@ -26,77 +26,178 @@
                 <h2>Objectif du projet</h2>
 
                 <p>
-                    Notre projet consiste à étudier et résoudre
-                    le problème du voyageur de commerce.
-                    L'objectif est de trouver le trajet le plus court
-                    permettant de visiter toutes les villes une seule
-                    fois avant de revenir au point de départ.
+                    Notre objectif était de développer
+                    un programme capable de lire des instances TSP,
+                    construire une solution rapidement,
+                    puis améliorer cette solution.
+                </p>
+
+                <p>
+                    Le projet a été réalisé en C++.
                 </p>
             </section>
 
             <section>
-                <h2>Complexité du Problème</h2>
+                <h2>Lecture des fichiers TSP</h2>
 
                 <p>
-                    Le problème du voyageur de commerce est un problème
-                    d'optimisation combinatoire considéré comme NP-difficile.
+                    Nous avons créé une structure
+                    <strong>InstanceTSP</strong>
+                    permettant de stocker :
+                </p>
+
+                <ul>
+                    <li>Le nom de l'instance</li>
+                    <li>Le nombre de villes</li>
+                    <li>Les coordonnées des villes</li>
+                    <li>La matrice des distances</li>
+                </ul>
+
+                <p>
+                    Le programme lit ensuite les fichiers .tsp
+                    contenant les données du problème.
                 </p>
 
                 <p>
-                    Le nombre de possibilités augmente extrêmement vite
-                    avec le nombre de villes.
-                </p>
-            </section>
-
-            <section>
-                <h2>Algorithmes étudiés</h2>
-
-                <h3>Algorithme Glouton</h3>
-
-                <p>
-                  Nous avons utilisé un algorithme glouton
-                  qui consiste à choisir à chaque étape
-                  la ville la plus proche non encore visitée. 
-                </p>
-
-                <p>
-                    Cette méthode est rapide mais ne garantit
-                    pas toujours la solution optimale.
-                </p>
-
-                <h3>Optimisation OR-Opt</h3>
-
-                <p>
-                    Après la génération d'un premier chemin,
-                    nous avons utilisé l'algorithme OR-Opt
-                    pour améliorer la solution.
-                </p>
-
-                <p>
-                    Cette technique permet de déplacer
-                    certaines portions du trajet afin
-                    de réduire la distance totale parcourue.
+                    Lorsque les coordonnées des villes sont présentes,
+                    les distances sont calculées avec
+                    la distance euclidienne.
                 </p>
             </section>
 
             <section>
-                <h2>Fonctionnement général</h2>
+                <h2>Matrice des distances</h2>
+
+                <p>
+                    Les distances entre les villes
+                    sont stockées dans un tableau 1D dynamique.
+                </p>
+
+                <p>
+                    Même si les distances représentent une matrice,
+                    elles sont enregistrées dans un seul tableau
+                    afin d'optimiser la mémoire.
+                </p>
+
+                <p>
+                    La formule utilisée est :
+                </p>
+
+                <p>
+                    distance[i * nb_villes + j]
+                </p>
+            </section>
+
+            <section>
+                <h2>Algorithme glouton</h2>
+
+                <p>
+                    La première solution est construite
+                    avec un algorithme glouton.
+                </p>
+
+                <p>
+                    Le principe est de partir d'une ville,
+                    puis de choisir à chaque étape
+                    la ville non visitée la plus proche.
+                </p>
+
+                <p>
+                    Étapes de l'algorithme :
+                </p>
 
                 <ol>
-                    <li>Génération des villes</li>
-                    <li>Construction d'un premier chemin avec l'algorithme glouton</li>
-                    <li>Optimisation du trajet avec OR-Opt</li>
-                    <li>Affichage du chemin final</li>
+                    <li>Choisir une ville de départ</li>
+                    <li>Marquer cette ville comme visitée</li>
+                    <li>Chercher la ville non visitée la plus proche</li>
+                    <li>L'ajouter au chemin</li>
+                    <li>Recommencer jusqu'à visiter toutes les villes</li>
+                    <li>Revenir à la ville de départ</li>
                 </ol>
+
+                <p>
+                    Cette méthode est très rapide,
+                    mais elle ne donne pas toujours
+                    le meilleur chemin possible.
+                </p>
             </section>
 
             <section>
-                <h2>Implémentation</h2>
+                <h2>OR-opt</h2>
 
                 <p>
-                    L'algorithme a été implémenté en C++ avec
-                    une gestion mémoire dynamique et une matrice
-                    de distances stockée en tableau 1D.
+                    Après la construction du chemin glouton,
+                    nous appliquons une amélioration appelée
+                    OR-opt.
+                </p>
+
+                <p>
+                    Le but est de réduire la longueur totale
+                    du trajet.
+                </p>
+
+                <p>
+                    Pour cela, l'algorithme teste
+                    différents déplacements de villes
+                    dans le chemin.
+                </p>
+
+                <p>
+                    Contrairement à la première version,
+                    la version rework ne garde pas
+                    la première amélioration trouvée.
+                </p>
+
+                <p>
+                    Elle teste tous les déplacements possibles,
+                    puis sélectionne le meilleur déplacement,
+                    c'est-à-dire celui qui réduit le plus
+                    la distance totale.
+                </p>
+            </section>
+
+            <section>
+                <h2>Recherche de la meilleure solution</h2>
+
+                <p>
+                    Le programme ne teste pas
+                    une seule ville de départ.
+                </p>
+
+                <p>
+                    Il exécute l'algorithme glouton
+                    puis OR-opt depuis chaque ville de départ possible.
+                </p>
+
+                <p>
+                    Ensuite, il conserve uniquement
+                    la meilleure solution obtenue.
+                </p>
+            </section>
+
+            <section>
+                <h2>Gestion mémoire</h2>
+
+                <p>
+                    Le projet utilise de la mémoire dynamique
+                    avec les tableaux alloués par new[].
+                </p>
+
+                <p>
+                    Nous avons donc créé des fonctions
+                    permettant :
+                </p>
+
+                <ul>
+                    <li>D'allouer la mémoire</li>
+                    <li>D'initialiser les structures</li>
+                    <li>De libérer correctement la mémoire</li>
+                </ul>
+
+                <p>
+                    Cela évite les fuites mémoire
+                    et permet de gérer des instances
+                    de tailles différentes.
                 </p>
             </section>
         </main>

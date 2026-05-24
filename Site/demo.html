@@ -23,27 +23,55 @@
 
         <main>
             <section>
+
                 <h2>Présentation de la démonstration</h2>
 
+                <h2>Fonctionnement général</h2>
+
+
                 <p>
-                    Cette page présente le fonctionnement de notre programme.
-                    Le code C++ lit une instance du problème du voyageur de commerce,
-                    puis applique un algorithme glouton et une optimisation OR-opt.
+                    Notre programme prend en entrée
+                    un fichier .tsp contenant une instance
+                    du problème du voyageur de commerce.
+                </p>
+
+                <p>
+                    Le programme lit les données,
+                    calcule les distances,
+                    construit une solution gloutonne,
+                    puis améliore cette solution
+                    avec OR-opt.
                 </p>
             </section>
 
             <section>
-                <h2>Principe général</h2>
+                <h2>Étape 1 : Lecture de l'instance</h2>
 
                 <p>
-                    Le programme résout le problème du voyageur de commerce (TSP)
-                    en plusieurs étapes : lecture d'une instance, calcul des distances,
-                    génération d'une solution gloutonne, puis amélioration avec OR-opt.
+                    Le programme commence par ouvrir
+                    le fichier .tsp.
+                </p>
+
+                <p>
+                    Il récupère :
+                </p>
+
+                <ul>
+                    <li>Le nom de l'instance</li>
+                    <li>Le nombre de villes</li>
+                    <li>Les coordonnées</li>
+                    <li>Le type de distance</li>
+                </ul>
+
+                <p>
+                    Les informations sont ensuite stockées
+                    dans la structure InstanceTSP.
                 </p>
             </section>
 
             <section>
-                <h2>Étapes de l'algorithme</h2>
+                <h2>Étape 2 : Calcul des distances</h2>
+
 
                 <ol>
                     <li>Lecture du fichier .tsp (instance)</li>
@@ -53,25 +81,47 @@
                     <li>Sélection de la meilleure solution</li>
                     <li>Amélioration avec OR-opt</li>
                 </ol>
+
+                <p>
+                    Lorsque les coordonnées sont présentes,
+                    le programme calcule automatiquement
+                    les distances entre toutes les villes.
+                </p>
+
+                <p>
+                    Les distances sont stockées
+                    dans une matrice représentée
+                    sous forme de tableau 1D.
+                </p>
+
             </section>
 
             <section>
-                <h2>Algorithme glouton</h2>
+                <h2>Étape 3 : Construction gloutonne</h2>
 
                 <p>
-                    L'algorithme glouton (plus proche voisin) consiste
-                    à partir d'une ville, puis à choisir à chaque étape
-                    la ville non visitée la plus proche.
+                    L'algorithme glouton démarre
+                    depuis une ville de départ.
                 </p>
 
                 <p>
-                    Cette méthode est rapide et simple,
-                    mais elle ne garantit pas une solution optimale.
+                    À chaque étape,
+                    il choisit la ville non visitée
+                    la plus proche.
                 </p>
 
-                <p>Exemple de résultat :</p>
+                <p>
+                    Exemple :
+                </p>
 
-                <p>0 → 3 → 5 → 2 → 1 → 4 → 0</p>
+                <p>
+                    0 → 3 → 5 → 2 → 1 → 4 → 0
+                </p>
+
+                <p>
+                    Cette solution est rapide à obtenir,
+                    mais elle n'est pas forcément optimale.
+                </p>
             </section>
 
             <section>
@@ -87,20 +137,39 @@
             <section>
                 <h2>Amélioration OR-opt</h2>
 
+                <h2>Étape 4 : Amélioration OR-opt</h2>
+
+
                 <p>
-                    L'algorithme OR-opt améliore la solution obtenue
-                    en déplaçant certaines villes ou sous-chemins afin
-                    de réduire la distance totale parcourue.
+                    Une fois la solution gloutonne construite,
+                    OR-opt essaye de l'améliorer.
                 </p>
 
                 <p>
-                     Il teste des modifications locales et conserve
-                     uniquement celles qui améliorent le coût global.
+                    L'algorithme déplace certaines villes
+                    à différents endroits du chemin
+                    afin de réduire la distance totale.
                 </p>
 
-                <p>Exemple après optimisation :</p>
+                <p>
+                    Tous les déplacements possibles
+                    sont testés.
+                </p>
 
-                <p>0 → 2 → 5 → 3 → 1 → 4 → 0</p>
+                <p>
+                    Le meilleur déplacement est conservé,
+                    puis l'algorithme recommence
+                    jusqu'à ce qu'aucune amélioration
+                    ne soit trouvée.
+                </p>
+
+                <p>
+                    Exemple après amélioration :
+                </p>
+
+                <p>
+                    0 → 2 → 5 → 3 → 1 → 4 → 0
+                </p>
             </section>
 
             <section>
@@ -117,9 +186,52 @@
                 <h2>Comparaison des résultats</h2>
 
                 <ul>
-                    <li><strong>Glouton :</strong> rapide mais solution souvent sous-optimale.</li>
-                    <li><strong>OR-opt :</strong> améliore la solution en réduisant la distance totale.</li>
-                    <li><strong>Conclusion :</strong> OR-opt donne de meilleurs résultats au prix d'un calcul plus long.</li>
+                    <li>
+                        <strong>Glouton :</strong>
+                        très rapide mais parfois éloigné
+                        de la meilleure solution.
+                    </li>
+
+                    <li>
+                        <strong>OR-opt :</strong>
+                        plus lent mais permet
+                        d'obtenir un meilleur trajet.
+                    </li>
+
+                    <li>
+                        <strong>Résultat :</strong>
+                        la combinaison des deux méthodes
+                        donne une solution efficace
+                        et améliorée.
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Exécution du programme</h2>
+
+                <p>
+                    Le programme est exécuté
+                    depuis le terminal.
+                </p>
+
+                <p>
+                    Exemple :
+                </p>
+
+                <p>
+                    .\voyageur_de_commerce.exe att48.tsp
+                </p>
+
+                <p>
+                    Le programme affiche ensuite :
+                </p>
+
+                <ul>
+                    <li>Les informations de l'instance</li>
+                    <li>Le meilleur départ trouvé</li>
+                    <li>Le chemin final</li>
+                    <li>La longueur totale</li>
                 </ul>
             </section>
         </main>
