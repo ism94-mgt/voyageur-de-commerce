@@ -1,79 +1,43 @@
-# Projet Voyageur de Commerce
+# Projet voyageur de commerce
 
 ## Présentation
 
-Ce projet a pour objectif de résoudre le problème du voyageur de commerce à partir de fichiers `.tsp`.
+Ce projet résout le problème du voyageur de commerce à partir de fichiers au format `.tsp`.
 
-Le programme lit une instance TSP, construit une première solution avec une méthode gloutonne, puis améliore cette solution avec une méthode OR-opt rework.
+Le but est de trouver une tournée qui passe une seule fois par chaque ville, puis qui revient à la ville de départ.
 
-Le but est de trouver un chemin passant par toutes les villes une seule fois, puis revenant à la ville de départ, avec une longueur totale la plus petite possible.
+La méthode utilisée est composée de deux étapes :
 
-## Organisation du projet
+1. Construction d'une première solution avec une méthode gloutonne.
+2. Amélioration de cette solution avec la méthode OR-opt rework.
 
-Le projet est séparé en plusieurs fichiers pour rendre le code plus clair.
+Le programme teste chaque ville comme ville de départ, améliore chaque solution gloutonne avec OR-opt rework, puis conserve la meilleure solution trouvée.
 
-### `tsp.h` et `tsp.cpp`
+Un affichage graphique avec SFML a aussi été ajouté pour visualiser la tournée trouvée lorsque le fichier `.tsp` contient des coordonnées.
 
-Ces fichiers servent à gérer les instances TSP.
+## Fichiers du projet
 
-Ils permettent de :
+Le projet contient les fichiers suivants :
 
-- initialiser une instance ;
-- lire un fichier `.tsp` ;
-- stocker les villes ;
-- stocker les distances ;
-- calculer les distances à partir des coordonnées ;
-- afficher les informations de l’instance.
+- `main.cpp` : contient le programme principal et le traitement des fichiers donnés en argument. Il affiche uniquement la meilleure solution obtenue avec OR-opt rework.
+- `tsp.h` : contient les structures et les prototypes liés aux instances TSP.
+- `tsp.cpp` : contient les fonctions de lecture des fichiers `.tsp`, d'allocation mémoire, de calcul des distances et d'affichage de l'instance.
+- `algorithmes.h` : contient la structure `Solution` et les prototypes des algorithmes.
+- `algorithmes.cpp` : contient la méthode gloutonne, l'affichage d'une solution et l'amélioration OR-opt rework.
+- `affichage.h` : contient le prototype de la fonction d'affichage graphique avec SFML.
+- `affichage.cpp` : contient l'affichage graphique de la solution. Les villes sont affichées en rouge, le trajet en noir, et la première ville du trajet en vert.
+- `CMakeLists.txt` : contient les indications permettant de compiler le projet avec CMake.
+- `README.md` : explique comment compiler et exécuter le programme.
 
-### `algorithmes.h` et `algorithmes.cpp`
-
-Ces fichiers contiennent les algorithmes utilisés pour construire et améliorer une solution.
-
-Ils contiennent :
-
-- la méthode gloutonne ;
-- l’affichage de la solution ;
-- l’amélioration OR-opt rework ;
-- la gestion mémoire des solutions.
-
-La méthode gloutonne construit une première solution en partant d’une ville et en choisissant à chaque étape la ville non visitée la plus proche.
-
-La méthode OR-opt rework améliore ensuite cette solution en déplaçant certaines villes dans le trajet si cela permet de réduire la distance totale.
-
-### `affichage.h` et `affichage.cpp`
-
-Ces fichiers servent à gérer l’affichage graphique avec SFML.
-
-La fonction `afficher_solution_sfml` permet d’ouvrir une fenêtre graphique et d’afficher la meilleure solution trouvée.
-
-L’affichage montre :
-
-- les villes sous forme de points rouges (la première est un point vert);
-- le trajet entre les villes avec des lignes noires ;
-- le retour de la dernière ville vers la première.
-
-L’affichage SFML est séparé dans un fichier à part pour garder le `main.cpp` plus lisible.
-
-### `main.cpp`
-
-Le fichier `main.cpp` sert à lancer le programme.
-
-Il permet de :
-
-- récupérer les fichiers `.tsp` donnés en argument ;
-- lire chaque fichier ;
-- tester chaque ville comme ville de départ ;
-- appliquer la méthode gloutonne ;
-- appliquer OR-opt rework ;
-- garder la meilleure solution ;
-- sauvegarder la solution dans `solution.txt` ;
-- afficher graphiquement la solution avec SFML.
+Les fichiers `.tsp` utilisés pour les tests peuvent aussi être placés dans le même dossier que les fichiers source.
 
 ## Compilation
 
-Le projet utilise CMake.
+Le projet se compile avec CMake.
 
-Le fichier `CMakeLists.txt` doit contenir les fichiers suivants :
+Comme le projet utilise SFML pour l'affichage graphique, SFML doit être installé et relié dans le fichier `CMakeLists.txt`.
+
+Le fichier `CMakeLists.txt` doit aussi contenir `affichage.cpp` dans la liste des fichiers du projet :
 
 ```cmake
 add_executable(voyageur_de_commerce
@@ -82,3 +46,6 @@ add_executable(voyageur_de_commerce
     algorithmes.cpp
     affichage.cpp
 )
+cmake -S . -B build
+cmake --build build
+.\build\voyageur_de_commerce.exe att48.tsp
