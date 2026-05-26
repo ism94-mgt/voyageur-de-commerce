@@ -53,6 +53,7 @@ Le fichier `CMakeLists.txt` doit aussi contenir `affichage.cpp` dans la liste de
 verifier le chemin de SFML par ex:
 
 include_directories("C:/SFML/include")
+
 link_directories("C:/SFML/lib")
 
 
