@@ -55,9 +55,7 @@ verifier le chemin de SFML par ex:
 include_directories("C:/SFML/include")
 link_directories("C:/SFML/lib")
 
-```powershell
-cmake -S . -B build -DSFML_DIR="C:/mon/chemin/vers/SFML/lib/cmake/SFML"
-```
+
 
 **2. Compiler**
 
