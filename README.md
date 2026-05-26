@@ -14,7 +14,7 @@ La méthode utilisée est composée de deux étapes :
 Le programme teste chaque ville comme ville de départ, améliore chaque solution gloutonne avec OR-opt rework, puis conserve la meilleure solution trouvée.
 
 Un affichage graphique avec SFML a aussi été ajouté pour visualiser la tournée trouvée lorsque le fichier `.tsp` contient des coordonnées.
-La solution est sauvegardée dans un fichier texte 'solution.txt'.
+La solution est sauvegardée dans un fichier texte `solution.txt` .
 
 ## Fichiers du projet
 
