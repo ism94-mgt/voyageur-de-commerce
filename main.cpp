@@ -254,7 +254,7 @@ void traiter_fichier(std::string nom_fichier)
 int main(int argc, char** argv)
 
 {
-    std::cout << "PROGRAMME LANCE" << std::endl;
+    
     if (argc < 2)
     {
         std::cout << "Usage : " << argv[0] << " fichier1.tsp fichier2.tsp ..."
