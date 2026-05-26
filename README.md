@@ -14,7 +14,7 @@ La méthode utilisée est composée de deux étapes :
 Le programme teste chaque ville comme ville de départ, améliore chaque solution gloutonne avec OR-opt rework, puis conserve la meilleure solution trouvée.
 
 Un affichage graphique avec SFML a aussi été ajouté pour visualiser la tournée trouvée lorsque le fichier `.tsp` contient des coordonnées.
-La solution est sauvegardée dans un fichier texte 'solution.txt'.
+La solution est sauvegardée dans un fichier texte `solution.txt` .
 
 ## Fichiers du projet
 
@@ -38,15 +38,9 @@ Le projet se compile avec CMake.
 
 Comme le projet utilise SFML pour l'affichage graphique, SFML doit être installé et relié dans le fichier `CMakeLists.txt`.
 
-Le fichier `CMakeLists.txt` doit aussi contenir `affichage.cpp` dans la liste des fichiers du projet :
+Le fichier `CMakeLists.txt` doit aussi contenir `affichage.cpp` dans la liste des fichiers du projet .
 
-```cmake
-add_executable(voyageur_de_commerce
-    main.cpp
-    tsp.cpp
-    algorithmes.cpp
-    affichage.cpp
-)
+```compilation
 cmake -S . -B build
 cmake --build build
 .\build\voyageur_de_commerce.exe att48.tsp
