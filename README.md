@@ -39,8 +39,28 @@ Le projet se compile avec CMake.
 Comme le projet utilise SFML pour l'affichage graphique, SFML doit être installé et relié dans le fichier `CMakeLists.txt`.
 
 Le fichier `CMakeLists.txt` doit aussi contenir `affichage.cpp` dans la liste des fichiers du projet .
+Compilation
+Prérequis
 
-```compilation
-cmake -S . -B build
+CMake (version 3.21 ou supérieure)
+Un compilateur C++17 (ex : MinGW sur Windows)
+SFML 3 installé sur la machine
+
+Étapes
+1. Configurer le chemin SFML dans CMakeLists.txt
+Ouvrir CMakeLists.txt et vérifier que le chemin dans SFML_SEARCH_PATHS correspond à l'emplacement de SFML sur votre machine. Si ce n'est pas le cas, ajouter votre chemin à la liste, par exemple :
+"C:/mon/chemin/vers/SFML/lib/cmake/SFML"
+Ou passer le chemin directement à CMake :
+powershellcmake -S . -B build -DSFML_DIR="C:/mon/chemin/vers/SFML/lib/cmake/SFML"
+2. Compiler
+powershellcmake -S . -B build
 cmake --build build
-.\build\voyageur_de_commerce.exe att48.tsp
+3. Copier les DLL SFML (important)
+Après la compilation, copier manuellement les fichiers .dll de SFML dans le dossier build/ à côté de l'exécutable. Ces fichiers se trouvent dans le dossier bin/ de votre installation SFML, par exemple :
+C:/SFML/bin/sfml-graphics-3.dll
+C:/SFML/bin/sfml-window-3.dll
+C:/SFML/bin/sfml-system-3.dll
+Sans ces fichiers, le programme se fermera immédiatement sans rien afficher.
+Exécution
+powershell.\build\voyageur_de_commerce.exe att48.tsp
+Remplacer att48.tsp par le nom du fichier .tsp à traiter. Le fichier doit se trouver dans le dossier du projet.
