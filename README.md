@@ -1,39 +1,84 @@
-# Projet voyageur de commerce
+# Projet Voyageur de Commerce
 
 ## Présentation
 
-Ce projet résout le problème du voyageur de commerce à partir de fichiers au format `.tsp`.
+Ce projet a pour objectif de résoudre le problème du voyageur de commerce à partir de fichiers `.tsp`.
 
-Le but est de trouver une tournée qui passe une seule fois par chaque ville, puis qui revient à la ville de départ.
+Le programme lit une instance TSP, construit une première solution avec une méthode gloutonne, puis améliore cette solution avec une méthode OR-opt rework.
 
-La méthode utilisée est composée de deux étapes :
+Le but est de trouver un chemin passant par toutes les villes une seule fois, puis revenant à la ville de départ, avec une longueur totale la plus petite possible.
 
-1. Construction d'une première solution avec une méthode gloutonne.
-2. Amélioration de cette solution avec la méthode OR-opt rework.
+## Organisation du projet
 
-Le programme teste chaque ville comme ville de départ, améliore chaque solution gloutonne avec OR-opt rework, puis conserve la meilleure solution trouvée.
+Le projet est séparé en plusieurs fichiers pour rendre le code plus clair.
 
-## Fichiers du projet
+### `tsp.h` et `tsp.cpp`
 
-Le projet contient les fichiers suivants :
+Ces fichiers servent à gérer les instances TSP.
 
-- `main.cpp` : contient le programme principal et le traitement des fichiers donnés en argument. Il affiche uniquement la meilleure solution obtenue avec OR-opt rework.
-- `tsp.h` : contient les structures et les prototypes liés aux instances TSP.
-- `tsp.cpp` : contient les fonctions de lecture des fichiers `.tsp`, d'allocation mémoire, de calcul des distances et d'affichage de l'instance.
-- `algorithmes.h` : contient la structure `Solution` et les prototypes des algorithmes.
-- `algorithmes.cpp` : contient la méthode gloutonne, l'affichage d'une solution et l'amélioration OR-opt rework.
-- `CMakeLists.txt` : contient les indications permettant de compiler le projet avec CMake.
-- `README.md` : explique comment compiler et exécuter le programme.
+Ils permettent de :
 
-Les fichiers `.tsp` utilisés pour les tests peuvent aussi être placés dans le même dossier que les fichiers source.
+- initialiser une instance ;
+- lire un fichier `.tsp` ;
+- stocker les villes ;
+- stocker les distances ;
+- calculer les distances à partir des coordonnées ;
+- afficher les informations de l’instance.
+
+### `algorithmes.h` et `algorithmes.cpp`
+
+Ces fichiers contiennent les algorithmes utilisés pour construire et améliorer une solution.
+
+Ils contiennent :
+
+- la méthode gloutonne ;
+- l’affichage de la solution ;
+- l’amélioration OR-opt rework ;
+- la gestion mémoire des solutions.
+
+La méthode gloutonne construit une première solution en partant d’une ville et en choisissant à chaque étape la ville non visitée la plus proche.
+
+La méthode OR-opt rework améliore ensuite cette solution en déplaçant certaines villes dans le trajet si cela permet de réduire la distance totale.
+
+### `affichage.h` et `affichage.cpp`
+
+Ces fichiers servent à gérer l’affichage graphique avec SFML.
+
+La fonction `afficher_solution_sfml` permet d’ouvrir une fenêtre graphique et d’afficher la meilleure solution trouvée.
+
+L’affichage montre :
+
+- les villes sous forme de points rouges ;
+- le trajet entre les villes avec des lignes noires ;
+- le retour de la dernière ville vers la première.
+
+L’affichage SFML est séparé dans un fichier à part pour garder le `main.cpp` plus lisible.
+
+### `main.cpp`
+
+Le fichier `main.cpp` sert à lancer le programme.
+
+Il permet de :
+
+- récupérer les fichiers `.tsp` donnés en argument ;
+- lire chaque fichier ;
+- tester chaque ville comme ville de départ ;
+- appliquer la méthode gloutonne ;
+- appliquer OR-opt rework ;
+- garder la meilleure solution ;
+- sauvegarder la solution dans `solution.txt` ;
+- afficher graphiquement la solution avec SFML.
 
 ## Compilation
 
-Le projet se compile avec CMake.
+Le projet utilise CMake.
 
-Depuis le dossier principal du projet, utiliser les commandes suivantes :
+Le fichier `CMakeLists.txt` doit contenir les fichiers suivants :
 
-```bash
-cmake -S . -B build
-cmake --build build
-.\build\voyageur_de_commerce.exe att48.tsp
+```cmake
+add_executable(voyageur_de_commerce
+    main.cpp
+    tsp.cpp
+    algorithmes.cpp
+    affichage.cpp
+)

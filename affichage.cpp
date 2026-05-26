@@ -5,13 +5,11 @@
 #include "affichage.h"
 
 /*
-But : afficher graphiquement la solution avec SFML.
-
-Version simple :
 - on ouvre une fenêtre ;
 - on adapte les coordonnées à la taille de la fenêtre ;
 - on trace les lignes du trajet en noir ;
-- on trace les villes avec des points rouges.
+- on trace les villes avec des points rouges ;
+- la première ville du trajet est affichée en vert.
 */
 void afficher_solution_sfml(const InstanceTSP & instance, const Solution & solution)
 {
@@ -112,7 +110,8 @@ void afficher_solution_sfml(const InstanceTSP & instance, const Solution & solut
 
         /*
         Partie 2 : dessiner les villes.
-        Chaque ville est représentée par un petit point rouge.
+        Les villes normales sont en rouge.
+        La première ville du trajet est en vert et un peu plus grosse.
         */
         for (int i = 0; i < instance.nb_villes; ++i)
         {
@@ -121,7 +120,17 @@ void afficher_solution_sfml(const InstanceTSP & instance, const Solution & solut
 
             sf::CircleShape point(4);
             point.setFillColor(sf::Color::Red);
-            point.setPosition(sf::Vector2f(x - 4, y - 4));
+
+            if (i == solution.ordre[0])
+            {
+                point.setRadius(7);
+                point.setFillColor(sf::Color::Green);
+                point.setPosition(sf::Vector2f(x - 7, y - 7));
+            }
+            else
+            {
+                point.setPosition(sf::Vector2f(x - 4, y - 4));
+            }
 
             fenetre.draw(point);
         }
