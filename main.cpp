@@ -127,7 +127,7 @@ void traiter_fichier(std::string nom_fichier)
 /*
 But : lancer le programme avec un ou plusieurs fichiers TSP donnés en argument.
 Exemple :
-./voyageur_de_commerce att48.tsp
+.\build\voyageur_de_commerce.exe att48.tsp
 */
 int main(int argc, char** argv)
 {
