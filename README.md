@@ -39,7 +39,7 @@ Le projet se compile avec CMake.
 Comme le projet utilise SFML pour l'affichage graphique, SFML doit être installé et relié dans le fichier `CMakeLists.txt`.
 
 Le fichier `CMakeLists.txt` doit aussi contenir `affichage.cpp` dans la liste des fichiers du projet .
-## Compilation
+
 
 ### Prérequis
 
