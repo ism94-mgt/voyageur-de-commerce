@@ -43,7 +43,7 @@ Le fichier `CMakeLists.txt` doit aussi contenir `affichage.cpp` dans la liste de
 
 ### Prérequis
 
-- CMake (version 3.21 ou supérieure)
+- CMake (version 3.10 )
 - Un compilateur C++17 (ex : MinGW sur Windows)
 - SFML 3 installé sur la machine
 
