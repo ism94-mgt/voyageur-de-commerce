@@ -1,6 +1,11 @@
 #include <iostream>
 #include "tsp.h"
 #include "algorithmes.h"
+#include <fstream>
+
+
+
+
 
 /*
 But : traiter un fichier TSP.
@@ -69,6 +74,32 @@ void traiter_fichier(std::string nom_fichier)
                   << meilleur_depart_rework << std::endl;
 
         afficher_solution(solution_rework);
+        std::ofstream fichier("solution.txt");
+
+fichier << "Longueur totale : " << solution_rework.longueur << std::endl;
+
+fichier << "Tournee trouvee :" << std::endl;
+
+for (int i = 0; i < solution_rework.nb_villes; ++i)
+{
+    fichier << solution_rework.ordre[i];
+
+    if (i < solution_rework.nb_villes - 1)
+    {
+        fichier << " -> ";
+    }
+}
+
+if (solution_rework.nb_villes > 0)
+{
+    fichier << " -> " << solution_rework.ordre[0];
+}
+
+fichier << std::endl;
+
+fichier.close();
+
+std::cout << "Solution sauvegardee dans solution.txt" << std::endl;
     }
     else
     {
