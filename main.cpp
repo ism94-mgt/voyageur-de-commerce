@@ -3,10 +3,6 @@
 #include "algorithmes.h"
 #include <fstream>
 
-
-
-
-
 /*
 But : traiter un fichier TSP.
 On lit l'instance, puis on construit une solution gloutonne pour chaque ville de depart.
