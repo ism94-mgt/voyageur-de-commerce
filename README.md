@@ -50,10 +50,10 @@ Le fichier `CMakeLists.txt` doit aussi contenir `affichage.cpp` dans la liste de
 ### Étapes
 
 **1. Configurer le chemin SFML dans CMakeLists.txt**
+verifier le chemin de SFML par ex:
 
-Ouvrir `CMakeLists.txt` et vérifier que le chemin dans `SFML_SEARCH_PATHS` correspond à l'emplacement de SFML sur votre machine. Si ce n'est pas le cas, ajouter votre chemin à la liste, par exemple :
-"C:/mon/chemin/vers/SFML/lib/cmake/SFML"
-Ou passer le chemin directement à CMake :
+include_directories("C:/SFML/include")
+link_directories("C:/SFML/lib")
 
 ```powershell
 cmake -S . -B build -DSFML_DIR="C:/mon/chemin/vers/SFML/lib/cmake/SFML"
@@ -70,7 +70,9 @@ cmake --build build
 
 Après la compilation, copier manuellement les fichiers `.dll` de SFML dans le dossier `build/` à côté de l'exécutable. Ces fichiers se trouvent dans le dossier `bin/` de votre installation SFML, par exemple :
 C:/SFML/bin/sfml-graphics-3.dll
+
 C:/SFML/bin/sfml-window-3.dll
+
 C:/SFML/bin/sfml-system-3.dll
 Sans ces fichiers, le programme se fermera immédiatement sans rien afficher.
 
