@@ -50,7 +50,7 @@ Le fichier `CMakeLists.txt` doit aussi contenir `affichage.cpp` dans la liste de
 ### Étapes
 
 **1. Configurer le chemin SFML dans CMakeLists.txt**
-verifier le chemin de SFML par ex:
+verifier le chemin de SFML :
 
 include_directories("C:/SFML/include")
 
