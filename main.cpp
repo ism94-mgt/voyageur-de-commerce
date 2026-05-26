@@ -1,13 +1,181 @@
 #include <iostream>
+#include <fstream>
+#include <optional>
+#include <SFML/Graphics.hpp>
+
 #include "tsp.h"
 #include "algorithmes.h"
-#include <fstream>
+
+/*
+But : sauvegarder la meilleure solution trouvée dans un fichier texte.
+Le fichier contient la longueur totale et la séquence des villes.
+*/
+void sauvegarder_solution_texte(const Solution & solution)
+{
+    std::ofstream fichier("solution.txt");
+
+    if (!fichier)
+    {
+        std::cout << "Impossible de creer le fichier solution.txt" << std::endl;
+        return;
+    }
+
+    fichier << "Longueur totale : " << solution.longueur << std::endl;
+    fichier << "Sequence trouvee :" << std::endl;
+
+    for (int i = 0; i < solution.nb_villes; ++i)
+    {
+        fichier << solution.ordre[i];
+
+        if (i < solution.nb_villes - 1)
+        {
+            fichier << " -> ";
+        }
+    }
+
+    if (solution.nb_villes > 0)
+    {
+        fichier << " -> " << solution.ordre[0];
+    }
+
+    fichier << std::endl;
+
+    fichier.close();
+
+    std::cout << "Solution sauvegardee dans solution.txt" << std::endl;
+}
+
+/*
+But : afficher graphiquement la solution avec SFML.
+
+Version simple :
+- on ouvre une fenêtre ;
+- on adapte les coordonnées à la taille de la fenêtre ;
+- on trace les lignes du trajet en noir ;
+- on trace les villes avec des points rouges.
+*/
+void afficher_solution_sfml(const InstanceTSP & instance, const Solution & solution)
+{
+    if (!instance.possede_coordonnees)
+    {
+        std::cout << "Pas de coordonnees, affichage SFML impossible." << std::endl;
+        return;
+    }
+
+    int largeur = 1000;
+    int hauteur = 800;
+    int marge = 50;
+
+    sf::RenderWindow fenetre(
+        sf::VideoMode(sf::Vector2u(largeur, hauteur)),
+        "Voyageur de commerce"
+    );
+
+    double min_x = instance.villes[0].x;
+    double max_x = instance.villes[0].x;
+    double min_y = instance.villes[0].y;
+    double max_y = instance.villes[0].y;
+
+    for (int i = 0; i < instance.nb_villes; ++i)
+    {
+        if (instance.villes[i].x < min_x)
+        {
+            min_x = instance.villes[i].x;
+        }
+
+        if (instance.villes[i].x > max_x)
+        {
+            max_x = instance.villes[i].x;
+        }
+
+        if (instance.villes[i].y < min_y)
+        {
+            min_y = instance.villes[i].y;
+        }
+
+        if (instance.villes[i].y > max_y)
+        {
+            max_y = instance.villes[i].y;
+        }
+    }
+
+    double ecart_x = max_x - min_x;
+    double ecart_y = max_y - min_y;
+
+    if (ecart_x == 0)
+    {
+        ecart_x = 1;
+    }
+
+    if (ecart_y == 0)
+    {
+        ecart_y = 1;
+    }
+
+    while (fenetre.isOpen())
+    {
+        while (const std::optional event = fenetre.pollEvent())
+        {
+            if (event->is<sf::Event::Closed>())
+            {
+                fenetre.close();
+            }
+        }
+
+        fenetre.clear(sf::Color::White);
+
+        /*
+        Partie 1 : dessiner le trajet.
+        On relie chaque ville à la ville suivante.
+        Le modulo permet de relier la dernière ville à la première.
+        */
+        for (int i = 0; i < solution.nb_villes; ++i)
+        {
+            int ville_a = solution.ordre[i];
+            int ville_b = solution.ordre[(i + 1) % solution.nb_villes];
+
+            float x1 = marge + (instance.villes[ville_a].x - min_x) * (largeur - 2 * marge) / ecart_x;
+            float y1 = marge + (instance.villes[ville_a].y - min_y) * (hauteur - 2 * marge) / ecart_y;
+
+            float x2 = marge + (instance.villes[ville_b].x - min_x) * (largeur - 2 * marge) / ecart_x;
+            float y2 = marge + (instance.villes[ville_b].y - min_y) * (hauteur - 2 * marge) / ecart_y;
+
+            sf::Vertex ligne[2];
+
+            ligne[0].position = sf::Vector2f(x1, y1);
+            ligne[0].color = sf::Color::Black;
+
+            ligne[1].position = sf::Vector2f(x2, y2);
+            ligne[1].color = sf::Color::Black;
+
+            fenetre.draw(ligne, 2, sf::PrimitiveType::Lines);
+        }
+
+        /*
+        Partie 2 : dessiner les villes.
+        Chaque ville est représentée par un petit point rouge.
+        */
+        for (int i = 0; i < instance.nb_villes; ++i)
+        {
+            float x = marge + (instance.villes[i].x - min_x) * (largeur - 2 * marge) / ecart_x;
+            float y = marge + (instance.villes[i].y - min_y) * (hauteur - 2 * marge) / ecart_y;
+
+            sf::CircleShape point(4);
+            point.setFillColor(sf::Color::Red);
+            point.setPosition(sf::Vector2f(x - 4, y - 4));
+
+            fenetre.draw(point);
+        }
+
+        fenetre.display();
+    }
+}
 
 /*
 But : traiter un fichier TSP.
-On lit l'instance, puis on construit une solution gloutonne pour chaque ville de depart.
-Ensuite, on améliore chaque solution avec OR-opt rework.
-On garde uniquement la meilleure solution obtenue avec OR-opt rework.
+On lit l'instance, on teste chaque ville comme départ,
+on applique le glouton puis OR-opt rework,
+et on garde la meilleure solution.
 */
 void traiter_fichier(std::string nom_fichier)
 {
@@ -37,13 +205,10 @@ void traiter_fichier(std::string nom_fichier)
 
             initialiser_solution(temp_rework);
 
-            // On construit d'abord une solution gloutonne
             methode_glouton(instance, temp_rework, depart);
 
-            // Puis on améliore cette solution avec OR-opt rework
             amelioration_or_opt_rework(instance, temp_rework);
 
-            // On garde la meilleure solution OR-opt rework trouvée
             if (meilleure_longueur_rework == -1 ||
                 temp_rework.longueur < meilleure_longueur_rework)
             {
@@ -54,6 +219,7 @@ void traiter_fichier(std::string nom_fichier)
 
                 solution_rework.nb_villes = temp_rework.nb_villes;
                 solution_rework.longueur = temp_rework.longueur;
+
                 solution_rework.ordre = new int[temp_rework.nb_villes];
 
                 for (int i = 0; i < temp_rework.nb_villes; ++i)
@@ -70,32 +236,10 @@ void traiter_fichier(std::string nom_fichier)
                   << meilleur_depart_rework << std::endl;
 
         afficher_solution(solution_rework);
-        std::ofstream fichier("solution.txt");
 
-fichier << "Longueur totale : " << solution_rework.longueur << std::endl;
+        sauvegarder_solution_texte(solution_rework);
 
-fichier << "Tournee trouvee :" << std::endl;
-
-for (int i = 0; i < solution_rework.nb_villes; ++i)
-{
-    fichier << solution_rework.ordre[i];
-
-    if (i < solution_rework.nb_villes - 1)
-    {
-        fichier << " -> ";
-    }
-}
-
-if (solution_rework.nb_villes > 0)
-{
-    fichier << " -> " << solution_rework.ordre[0];
-}
-
-fichier << std::endl;
-
-fichier.close();
-
-std::cout << "Solution sauvegardee dans solution.txt" << std::endl;
+        afficher_solution_sfml(instance, solution_rework);
     }
     else
     {
@@ -120,11 +264,9 @@ int main(int argc, char** argv)
     for (int i = 1; i < argc; ++i)
     {
         std::cout << std::endl;
+
         traiter_fichier(argv[i]);
     }
 
     return 0;
 }
-
-// Exemple d'execution :
-// .\voyageur_de_commerce.exe att48.tsp

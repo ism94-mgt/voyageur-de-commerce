@@ -1,11 +1,21 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.10)
 
 project(voyageur_de_commerce)
 
-add_compile_options(-Wall)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(${PROJECT_NAME}
-    algorithmes.cpp
+include_directories("C:/SFML/include")
+link_directories("C:/SFML/lib")
+
+add_executable(voyageur_de_commerce
     main.cpp
     tsp.cpp
+    algorithmes.cpp
+)
+
+target_link_libraries(voyageur_de_commerce
+    sfml-graphics
+    sfml-window
+    sfml-system
 )
