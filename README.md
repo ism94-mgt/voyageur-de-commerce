@@ -48,7 +48,7 @@ La fonction `afficher_solution_sfml` permet d’ouvrir une fenêtre graphique et
 
 L’affichage montre :
 
-- les villes sous forme de points rouges ;
+- les villes sous forme de points rouges (la première est un point vert);
 - le trajet entre les villes avec des lignes noires ;
 - le retour de la dernière ville vers la première.
 
