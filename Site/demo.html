@@ -23,9 +23,7 @@
 
         <main>
             <section>
-
                 <h2>Fonctionnement général</h2>
-
 
                 <p>
                     Notre programme prend en entrée
@@ -69,7 +67,6 @@
 
             <section>
                 <h2>Étape 2 : Calcul des distances</h2>
-
 
                 <ol>
                     <li>Lecture du fichier .tsp (instance)</li>
@@ -133,9 +130,7 @@
             </section>
 
             <section>
-
                 <h2>Étape 4 : Amélioration OR-opt</h2>
-
 
                 <p>
                     Une fois la solution gloutonne construite,
@@ -177,6 +172,30 @@
                 </p>
 
                 <img src="or-opt.png" alt="Résultat après optimisation OR-opt">
+            </section>
+
+            <section>
+                <h2>Affichage graphique avec SFML</h2>
+                
+                <p>
+                    Le programme utilise la bibliothèque SFML
+                    pour afficher graphiquement la solution finale.
+                </p>
+                <p>
+                    Les villes sont représentées par des points rouges,
+                    tandis que la ville de départ apparaît en vert.
+                </p>
+                
+                <p>
+                    Les lignes noires représentent le trajet
+                    suivi entre les différentes villes.
+                </p>
+                
+                <p>
+                    Cela permet de visualiser graphiquement
+                    la solution obtenue après l'amélioration OR-opt.
+                </p>
+                <img src="sfml-resultat.png" alt="Affichage graphique du trajet TSP avec SFML" class="image-demo">
             </section>
 
             <section>
