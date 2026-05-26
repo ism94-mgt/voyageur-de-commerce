@@ -69,11 +69,13 @@ cmake --build build
 **3. Copier les DLL SFML (important)**
 
 Après la compilation, copier manuellement les fichiers `.dll` de SFML dans le dossier `build/` à côté de l'exécutable. Ces fichiers se trouvent dans le dossier `bin/` de votre installation SFML, par exemple :
+
 C:/SFML/bin/sfml-graphics-3.dll
 
 C:/SFML/bin/sfml-window-3.dll
 
 C:/SFML/bin/sfml-system-3.dll
+
 Sans ces fichiers, le programme se fermera immédiatement sans rien afficher.
 
 ## Exécution
