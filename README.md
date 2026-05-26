@@ -62,7 +62,7 @@ cmake -S . -B build -DSFML_DIR="C:/mon/chemin/vers/SFML/lib/cmake/SFML"
 **2. Compiler**
 
 ```powershell
-cmake -S . -B build
+cmake -S . -B build -G "MinGW Makefiles"
 cmake --build build
 ```
 
@@ -77,7 +77,7 @@ Sans ces fichiers, le programme se fermera immédiatement sans rien afficher.
 ## Exécution
 
 ```powershell
-.\build\voyageur_de_commerce.exe att48.tsp
+.\build\voyageur_de_commerce.exe fichier.tsp
 ```
 
-Remplacer `att48.tsp` par le nom du fichier `.tsp` à traiter. Le fichier doit se trouver dans le dossier du projet.
+Le fichier tsp doit se trouver dans le dossier du projet.
