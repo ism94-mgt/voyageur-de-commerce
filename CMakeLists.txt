@@ -12,6 +12,7 @@ add_executable(voyageur_de_commerce
     main.cpp
     tsp.cpp
     algorithmes.cpp
+    affichage.cpp
 )
 
 target_link_libraries(voyageur_de_commerce
